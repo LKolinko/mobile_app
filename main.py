@@ -11,6 +11,7 @@ from kivy.core.window import Window
 from kivy.uix.image import Image
 from kivy.lang import Builder
 import time
+
 #Массивчик результатов
 results = [0] * 6
 sm = ScreenManager()
@@ -22,12 +23,13 @@ class Main_screen(Screen):
         super().__init__()
         self.name = 'Main'
 
-        im = Image(source="img.png", size_hint=(.5, .5), pos_hint={'center_x': .3, 'center_y': 0.95})
+        Icon = Image(source="img_1.png", size_hint=(.7, .7), pos_hint={'center_x': .5, 'center_y': .7})
+        self.add_widget(Icon)
+
+        im = Image(source="img.png", size_hint=(.3, .3), pos_hint={'center_x': .2, 'center_y': 0.95})
         self.add_widget(im)
 
     def to_second_scrn(self, *args):
-        for i in range(0, 6):
-            results[i] = 0
         self.manager.current = 'Second'
         return 0
 
@@ -37,7 +39,7 @@ class Second_screen(Screen):
         super().__init__()
         self.name = 'Second'
 
-        im = Image(source="img.png", size_hint=(.5, .5), pos_hint={'center_x': .3, 'center_y': 0.95})
+        im = Image(source="img.png", size_hint=(.3, .3), pos_hint={'center_x': .2, 'center_y': 0.95})
         self.add_widget(im)
 
     def to_test_scrn(self, *args):
@@ -53,11 +55,11 @@ class test_screen1(Screen):
         self.name = 'Test1'
         test_screen1_layout = FloatLayout()
         self.add_widget(test_screen1_layout)
-        btn1 = Button(text='тест №1\n\nНажимайте сюда\n\nОтсчёт времени начнётся\n\nПосле первого нажатия',  size_hint=(.8, .5), pos_hint={'center_x': .5, 'center_y': .5})
+        btn1 = Button(text='тест №1\n\n\n\n\n\nОбласть для отмечания точек\n\n\n\n\n\nОтсчёт времени начнётся\nпосле первого нажатия',  size_hint=(.8, .5), pos_hint={'center_x': .5, 'center_y': .5})
         btn1.bind(on_press=self.callback)
         test_screen1_layout.add_widget(btn1)
 
-        im = Image(source="img.png", size_hint=(.5, .5), pos_hint={'center_x': .3, 'center_y': 0.95})
+        im = Image(source="img.png", size_hint=(.3, .3), pos_hint={'center_x': .2, 'center_y': 0.95})
         self.add_widget(im)
 
     def callback(self, *args):
@@ -77,11 +79,11 @@ class test_screen2(Screen):
         self.name = 'Test2'
         test_screen1_layout = FloatLayout()
         self.add_widget(test_screen1_layout)
-        btn1 = Button(text='тест №2\n\nНажимайте сюда\n\nОтсчёт времени начнётся\n\nПосле первого нажатия',  size_hint=(.8, .5), pos_hint={'center_x': .5, 'center_y': .5})
+        btn1 = Button(text='тест №2\n\n\n\n\n\nОбласть для отмечания точек\n\n\n\n\n\nОтсчёт времени начнётся\nпосле первого нажатия',  size_hint=(.8, .5), pos_hint={'center_x': .5, 'center_y': .5})
         btn1.bind(on_press=self.callback)
         test_screen1_layout.add_widget(btn1)
 
-        im = Image(source="img.png", size_hint=(.5, .5), pos_hint={'center_x': .3, 'center_y': 0.95})
+        im = Image(source="img.png", size_hint=(.3, .3), pos_hint={'center_x': .2, 'center_y': 0.95})
         self.add_widget(im)
 
 
@@ -102,11 +104,11 @@ class test_screen3(Screen):
         self.name = 'Test3'
         test_screen1_layout = FloatLayout()
         self.add_widget(test_screen1_layout)
-        btn1 = Button(text='тест №3\n\nНажимайте сюда\n\nОтсчёт времени начнётся\n\nПосле первого нажатия',  size_hint=(.8, .5), pos_hint={'center_x': .5, 'center_y': .5})
+        btn1 = Button(text='тест №3\n\n\n\n\n\nОбласть для отмечания точек\n\n\n\n\n\nОтсчёт времени начнётся\nпосле первого нажатия',  size_hint=(.8, .5), pos_hint={'center_x': .5, 'center_y': .5})
         btn1.bind(on_press=self.callback)
         test_screen1_layout.add_widget(btn1)
 
-        im = Image(source="img.png", size_hint=(.5, .5), pos_hint={'center_x': .3, 'center_y': 0.95})
+        im = Image(source="img.png", size_hint=(.3, .3), pos_hint={'center_x': .2, 'center_y': 0.95})
         self.add_widget(im)
 
     def callback(self, *args):
@@ -126,11 +128,11 @@ class test_screen4(Screen):
         self.name = 'Test4'
         test_screen1_layout = FloatLayout()
         self.add_widget(test_screen1_layout)
-        btn1 = Button(text='тест №4\n\nНажимайте сюда\n\nОтсчёт времени начнётся\n\nПосле первого нажатия',  size_hint=(.8, .5), pos_hint={'center_x': .5, 'center_y': .5})
+        btn1 = Button(text='тест №4\n\n\n\n\n\nОбласть для отмечания точек\n\n\n\n\n\nОтсчёт времени начнётся\nпосле первого нажатия',  size_hint=(.8, .5), pos_hint={'center_x': .5, 'center_y': .5})
         btn1.bind(on_press=self.callback)
         test_screen1_layout.add_widget(btn1)
 
-        im = Image(source="img.png", size_hint=(.5, .5), pos_hint={'center_x': .3, 'center_y': 0.95})
+        im = Image(source="img.png", size_hint=(.3, .3), pos_hint={'center_x': .2, 'center_y': 0.95})
         self.add_widget(im)
 
 
@@ -151,11 +153,11 @@ class test_screen5(Screen):
         self.name = 'Test5'
         test_screen1_layout = FloatLayout()
         self.add_widget(test_screen1_layout)
-        btn1 = Button(text='тест №5\n\nНажимайте сюда\n\nОтсчёт времени начнётся\n\nПосле первого нажатия',  size_hint=(.8, .5), pos_hint={'center_x': .5, 'center_y': .5})
+        btn1 = Button(text='тест №5\n\n\n\n\n\nОбласть для отмечания точек\n\n\n\n\n\nОтсчёт времени начнётся\nпосле первого нажатия',  size_hint=(.8, .5), pos_hint={'center_x': .5, 'center_y': .5})
         btn1.bind(on_press=self.callback)
         test_screen1_layout.add_widget(btn1)
 
-        im = Image(source="img.png", size_hint=(.5, .5), pos_hint={'center_x': .3, 'center_y': 0.95})
+        im = Image(source="img.png", size_hint=(.3, .3), pos_hint={'center_x': .2, 'center_y': 0.95})
         self.add_widget(im)
 
     def callback(self, *args):
@@ -176,11 +178,11 @@ class test_screen6(Screen):
         self.name = 'Test6'
         test_screen1_layout = FloatLayout()
         self.add_widget(test_screen1_layout)
-        btn1 = Button(text='тест №6\n\nНажимайте сюда\n\nОтсчёт времени начнётся\n\nПосле первого нажатия',  size_hint=(.8, .5), pos_hint={'center_x': .5, 'center_y': .5})
+        btn1 = Button(text='тест №6\n\n\n\n\n\nОбласть для отмечания точек\n\n\n\n\n\nОтсчёт времени начнётся\nпосле первого нажатия',  size_hint=(.8, .5), pos_hint={'center_x': .5, 'center_y': .5})
         btn1.bind(on_press=self.callback)
         test_screen1_layout.add_widget(btn1)
 
-        im = Image(source="img.png", size_hint=(.5, .5), pos_hint={'center_x': .3, 'center_y': 0.95})
+        im = Image(source="img.png", size_hint=(.3, .3), pos_hint={'center_x': .2, 'center_y': 0.95})
         self.add_widget(im)
 
     def callback(self, *args):
@@ -205,10 +207,13 @@ class res_screen(Screen):
         btn2.bind(on_press=self.to_main_screen)
         test_screen1_layout.add_widget(btn2)
 
-        im = Image(source="img.png", size_hint=(.5, .5), pos_hint={'center_x': .3, 'center_y': 0.95})
+        im = Image(source="img.png", size_hint=(.3, .3), pos_hint={'center_x': .2, 'center_y': 0.95})
         self.add_widget(im)
 
     def to_main_screen(self, *args):
+        #сброс результатов для следующего тестирования
+        for i in range(0, 6):
+            results[i] = 0
         self.manager.current = 'Main'
         self.remove_widget(self.im)
         return 0
@@ -236,7 +241,7 @@ class res_screen(Screen):
 
 
 
-class AwesomeApp(App):
+class TapT_Test(App):
     def build(self):
         sm.add_widget(Main_screen())
         sm.add_widget(Second_screen())
@@ -251,4 +256,4 @@ class AwesomeApp(App):
 
 
 if __name__ == '__main__':
-    AwesomeApp().run()
+    TapT_Test().run()
