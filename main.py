@@ -23,7 +23,7 @@ class Main_screen(Screen):
         super().__init__()
         self.name = 'Main'
 
-        Icon = Image(source="img_1.png", size_hint=(.7, .7), pos_hint={'center_x': .5, 'center_y': .7})
+        Icon = Image(source="img_1.png", size_hint=(1, 1), pos_hint={'center_x': .5, 'center_y': .7})
         self.add_widget(Icon)
 
         im = Image(source="img.png", size_hint=(.3, .3), pos_hint={'center_x': .2, 'center_y': 0.95})
@@ -220,10 +220,6 @@ class res_screen(Screen):
 
     def print_res(self, *args):
 
-        letters = string.ascii_lowercase
-        rand_string = ''.join(random.choice(letters) for i in range(4))
-        rand_string += ".png"
-
         x = [1, 2, 3, 4, 5, 6]
         y = np.array(results)
         plt.title("Результаты теста")
@@ -231,11 +227,10 @@ class res_screen(Screen):
         plt.ylabel("количество нажатий")
         plt.plot(x, y, color="green")
 
-        plt.savefig(rand_string)
+        plt.savefig('res.png')
         plt.close()
 
-        self.im = Image(source=rand_string, pos_hint={'center_x': .5, 'center_y': .6})
-        os.remove(rand_string)
+        self.im = Image(source='res.png', pos_hint={'center_x': .5, 'center_y': .6}, size_hint=(1, 1))
 
         self.add_widget(self.im)
 
