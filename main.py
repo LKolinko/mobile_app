@@ -1,5 +1,6 @@
 import os
 import random
+import shutil
 import string
 import matplotlib.pyplot as plt
 import numpy as np
@@ -10,6 +11,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.core.window import Window
 from kivy.uix.image import Image
 from kivy.lang import Builder
+from os import path
 import time
 
 #Массивчик результатов
@@ -200,15 +202,26 @@ class res_screen(Screen):
         self.name = 'Res'
         test_screen1_layout = FloatLayout()
         self.add_widget(test_screen1_layout)
-        btn1 = Button(text='Показать результаты', size_hint=(.7, .1), pos_hint={'center_x': .5, 'center_y': .1})
+
+        btn1 = Button(text='Показать результаты', size_hint=(.7, .07), pos_hint={'center_x': .5, 'center_y': .05})
         btn1.bind(on_press=self.print_res)
         test_screen1_layout.add_widget(btn1)
-        btn2 = Button(text='пройти тест снова', size_hint=(.7, .1), pos_hint={'center_x': .5, 'center_y': .2})
+
+        btn2 = Button(text='Пройти тест снова', size_hint=(.7, .07), pos_hint={'center_x': .5, 'center_y': .13})
         btn2.bind(on_press=self.to_main_screen)
         test_screen1_layout.add_widget(btn2)
 
+        #кнопка для скачивания !!!!нужно реализовать скачиввание
+        btn3 = Button(text="Скачать график", size_hint=(.7, .07), pos_hint={'center_x': .5, 'center_y': .21})
+        btn3.bind(on_press=self.Download)
+        test_screen1_layout.add_widget(btn3)
+
         im = Image(source="img.png", size_hint=(.3, .3), pos_hint={'center_x': .2, 'center_y': 0.95})
         self.add_widget(im)
+
+    #сохраняет график в Downloud
+    def Download(self, *args):
+        shutil.move("res.png", '../../Downloads/res')
 
     def to_main_screen(self, *args):
         #сброс результатов для следующего тестирования
