@@ -1,7 +1,6 @@
 import os
-import random
-import shutil
-import string
+from random import choice
+from string import ascii_letters
 import matplotlib.pyplot as plt
 import numpy as np
 from kivy.app import App
@@ -278,6 +277,8 @@ class res_screen(Screen):
 
     def print_res(self, *args):
 
+        name = ''.join(choice(ascii_letters) for i in range(12)) + ".png"
+
         x = [1, 2, 3, 4, 5, 6]
         y = np.array(results)
         plt.title("Результаты теста")
@@ -285,10 +286,12 @@ class res_screen(Screen):
         plt.ylabel("количество нажатий")
         plt.plot(x, y, color="green")
 
-        plt.savefig('res.png')
+        plt.savefig(name)
         plt.close()
 
-        self.im = Image(source='res.png', pos_hint={'center_x': .5, 'center_y': .6}, size_hint=(1,1))
+        self.im = Image(source=name, pos_hint={'center_x': .5, 'center_y': .6}, size_hint=(1,1))
+
+        os.remove(name)
 
         self.add_widget(self.im)
 
