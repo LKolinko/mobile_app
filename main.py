@@ -1,4 +1,5 @@
 import os
+import shutil
 from random import choice
 from string import ascii_letters
 import matplotlib.pyplot as plt
@@ -12,6 +13,7 @@ from kivy.uix.image import Image
 from kivy.lang import Builder
 from kivy.uix.label import Label
 import time
+from os import path
 
 #Массивчик результатов
 results = [0] * 6
@@ -266,8 +268,14 @@ class res_screen(Screen):
         btn2.bind(on_press=self.to_main_screen)
         test_screen1_layout.add_widget(btn2)
 
+        btn3 = Button(text='                Скачать результат\n(после нажатия "Показать результаты")', size_hint=(.7, .07), pos_hint={'center_x': .5, 'center_y': .21})
+        btn3.bind(on_press=self.download_file)
+        test_screen1_layout.add_widget(btn3)
+
 
     def to_main_screen(self, *args):
+        if path.exists(self.name_png):
+            os.remove(self.name_png)
         #сброс результатов для следующего тестирования
         for i in range(0, 6):
             results[i] = 0
@@ -275,9 +283,13 @@ class res_screen(Screen):
         self.remove_widget(self.im)
         return 0
 
+    def download_file(self, *args):
+        shutil.move(self.name_png, "../../../../Download/res.png")
+        #os.remove(self.name_png)
+
     def print_res(self, *args):
 
-        name = ''.join(choice(ascii_letters) for i in range(12)) + ".png"
+        self.name_png = ''.join(choice(ascii_letters) for i in range(12)) + ".png"
 
         x = [1, 2, 3, 4, 5, 6]
         y = np.array(results)
@@ -286,12 +298,10 @@ class res_screen(Screen):
         plt.ylabel("количество нажатий")
         plt.plot(x, y, color="green")
 
-        plt.savefig(name)
+        plt.savefig(self.name_png)
         plt.close()
 
-        self.im = Image(source=name, pos_hint={'center_x': .5, 'center_y': .6}, size_hint=(1,1))
-
-        os.remove(name)
+        self.im = Image(source=self.name_png, pos_hint={'center_x': .5, 'center_y': .6}, size_hint=(1,1))
 
         self.add_widget(self.im)
 
