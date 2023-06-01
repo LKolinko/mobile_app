@@ -5,6 +5,7 @@ from string import ascii_letters
 import matplotlib.pyplot as plt
 import numpy as np
 from kivy.app import App
+from kivy.utils import platform
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.floatlayout import FloatLayout
@@ -14,6 +15,12 @@ from kivy.lang import Builder
 from kivy.uix.label import Label
 import time
 from os import path
+
+if platform == 'android':
+    from android.storage import primary_external_storage_path
+    dir = primary_external_storage_path()
+    download_dir_path = os.path.join(dir, 'Download')
+
 
 #Массивчик результатов
 results = [0] * 6
@@ -26,7 +33,7 @@ class Main_screen(Screen):
         super().__init__()
         self.name = 'Main'
 
-        Icon = Image(source="img_1.png", size_hint=(1, 1), pos_hint={'center_x': .5, 'center_y': .7})
+        Icon = Image(source="img_1.png", pos_hint={'center_x': .5, 'center_y': .7})
         self.add_widget(Icon)
 
         im = Image(source="img.png", size_hint=(.3, .3), pos_hint={'center_x': .2, 'center_y': 0.95})
@@ -249,6 +256,7 @@ class test_screen6(Screen):
             self.t = time.time()
         if (time.time() - self.t >= 5):
             self.manager.current = 'Res'
+
             return 0
         results[5] += 1
 
@@ -260,22 +268,20 @@ class res_screen(Screen):
         test_screen1_layout = FloatLayout()
         self.add_widget(test_screen1_layout)
 
-        btn1 = Button(text='Показать результаты', size_hint=(.7, .07), pos_hint={'center_x': .5, 'center_y': .05})
+        btn1 = Button(text='Показать результат', size_hint=(.7, .07), pos_hint={'center_x': .5, 'center_y': .21})
         btn1.bind(on_press=self.print_res)
         test_screen1_layout.add_widget(btn1)
 
-        btn2 = Button(text='Пройти тест снова', size_hint=(.7, .07), pos_hint={'center_x': .5, 'center_y': .13})
+        btn2 = Button(text='Пройти тест снова', size_hint=(.7, .07), pos_hint={'center_x': .5, 'center_y': .05})
         btn2.bind(on_press=self.to_main_screen)
         test_screen1_layout.add_widget(btn2)
 
-        btn3 = Button(text='                Скачать результат\n(после нажатия "Показать результаты")', size_hint=(.7, .07), pos_hint={'center_x': .5, 'center_y': .21})
+        btn3 = Button(text='Скачать результат', size_hint=(.7, .07), pos_hint={'center_x': .5, 'center_y': .13})
         btn3.bind(on_press=self.download_file)
         test_screen1_layout.add_widget(btn3)
 
 
     def to_main_screen(self, *args):
-        if path.exists(self.name_png):
-            os.remove(self.name_png)
         #сброс результатов для следующего тестирования
         for i in range(0, 6):
             results[i] = 0
@@ -284,12 +290,8 @@ class res_screen(Screen):
         return 0
 
     def download_file(self, *args):
-        shutil.move(self.name_png, "../../../../Download/res.png")
-        #os.remove(self.name_png)
 
-    def print_res(self, *args):
-
-        self.name_png = ''.join(choice(ascii_letters) for i in range(12)) + ".png"
+        name_png = ''.join(choice(ascii_letters) for i in range(12)) + ".png"
 
         x = [1, 2, 3, 4, 5, 6]
         y = np.array(results)
@@ -298,10 +300,34 @@ class res_screen(Screen):
         plt.ylabel("количество нажатий")
         plt.plot(x, y, color="green")
 
-        plt.savefig(self.name_png)
+        plt.savefig(name_png)
         plt.close()
 
-        self.im = Image(source=self.name_png, pos_hint={'center_x': .5, 'center_y': .6}, size_hint=(1,1))
+        self.im = Image(source=name_png, pos_hint={'center_x': .5, 'center_y': .6})
+
+        self.add_widget(self.im)
+
+        shutil.move(name_png, download_dir_path)
+
+        os.remove(name_png)
+
+    def print_res(self, *args):
+
+        name_png = ''.join(choice(ascii_letters) for i in range(12)) + ".png"
+
+        x = [1, 2, 3, 4, 5, 6]
+        y = np.array(results)
+        plt.title("Результаты теста")
+        plt.xlabel("№  попытки")
+        plt.ylabel("количество нажатий")
+        plt.plot(x, y, color="green")
+
+        plt.savefig(name_png)
+        plt.close()
+
+        self.im = Image(source=name_png, pos_hint={'center_x': .5, 'center_y': .6})
+
+        os.remove(name_png)
 
         self.add_widget(self.im)
 
