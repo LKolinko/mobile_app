@@ -12,6 +12,8 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.floatlayout import FloatLayout
 from kivy.core.window import Window
 from kivy.uix.image import Image
+from kivy.uix.textinput import TextInput
+from kivy.uix.checkbox import CheckBox
 from kivy.lang import Builder
 from kivy.uix.label import Label
 import time
@@ -254,16 +256,8 @@ class res_screen(Screen):
 
 
     def download_file(self, *args):
-        name_png = "save.png"
-        x = [1, 2, 3, 4, 5, 6]
-        y = np.array(results)
-        plt.title("Результаты теста")
-        plt.xlabel("№  попытки")
-        plt.ylabel("количество нажатий")
-        plt.plot(x, y, color="green")
-        plt.savefig(name_png)
-        plt.close()
-        shutil.move(name_png, download_dir_path)
+        set_screen("Download")
+        return 0
 
     def print_res(self, *args):
 
@@ -300,8 +294,81 @@ class res_screen(Screen):
         self.add_widget(self.im)
 
 
+class Download_screen(Screen):
+    def __init__(self):
+        super().__init__()
+        self.name = "Download"
+        self.test_screen1_layout = FloatLayout()
+        self.add_widget(self.test_screen1_layout)
+
+        l = Label(text="Скачивание результата",pos_hint={'center_x': .5, 'center_y': .95}, font_size='20pt',color=(0,0,0,1))
+        self.test_screen1_layout.add_widget(l)
+
+        self.text_input = TextInput(pos_hint={'center_x': .5, 'center_y': .75}, size_hint=(.9, .1))
+        self.test_screen1_layout.add_widget(self.text_input)
+
+        l2 = Label(text='Введите имя файла:',pos_hint={'center_x': .27, 'center_y': .82},color=(0,0,0,1),font_size='15pt')
+        self.test_screen1_layout.add_widget(l2)
+
+        l3 = Label(text='Выберите формат файла:', pos_hint={'center_x': .33, 'center_y': .6},color=(0,0,0,1),font_size='15pt')
+        self.test_screen1_layout.add_widget(l3)
+
+        self.flag = 1
+
+        lable_first_check = Label(text="<имя файла>.png", pos_hint={'center_x': .2, 'center_y': .5}, color=(0,0,0,1))
+        self.test_screen1_layout.add_widget(lable_first_check)
+        first_check = CheckBox(group='test',pos_hint={'center_x':.9, 'center_y': .5},size_hint=(.2, .2),color=(0,0,0,1),active=True,on_press=self.first_check_enter)
+        self.test_screen1_layout.add_widget(first_check)
+
+        lable_second_check = Label(text="<имя файла>.pdf", pos_hint={'center_x': .2, 'center_y': .4}, color=(0, 0, 0, 1))
+        self.test_screen1_layout.add_widget(lable_second_check)
+        second_check = CheckBox(group='test',pos_hint={'center_x':.9, 'center_y': .4},size_hint=(.2, .2),color=(0,0,0,1),on_press=self.second_check_enter)
+        self.test_screen1_layout.add_widget(second_check)
+
+        btn = Button(text="Скачать файл",pos_hint={'center_x':.5, 'center_y': .1}, size_hint=(.7, .1),color=(0,0,0,1))
+        btn.bind(on_press=self.Download)
+        btn.opacity = 0.5
+        self.test_screen1_layout.add_widget(btn)
+
+    def first_check_enter(self, *args):
+        self.flag = 1
+
+    def second_check_enter(self, *args):
+        self.flag = 2
+
+    def Download(self, *args):
+
+        if (self.text_input.text != ""):
+            name_save = self.text_input.text
+        else:
+            name_save = ''.join(choice(ascii_letters) for i in range(12))
+
+        if (self.flag == 1):
+            name_save += ".png"
+        else:
+            name_save += ".pdf"
+
+        l = Label(text="Файл " + name_save,pos_hint={'center_x':.5,'center_y':.23},color=(0,0,0,1))
+        self.test_screen1_layout.add_widget(l)
+
+        l2 = Label(text="успешно сохранён в папку Download",pos_hint={'center_x':.5, 'center_y':.2},color=(0,0,0,1))
+        self.test_screen1_layout.add_widget(l2)
+
+        x = [1, 2, 3, 4, 5, 6]
+        y = np.array(results)
+        plt.title("Результаты теста")
+        plt.xlabel("№  попытки")
+        plt.ylabel("количество нажатий")
+        plt.plot(x, y, color="green")
+        plt.savefig(name_save)
+        plt.close()
+        shutil.move(name_save, download_dir_path)
+
+
+
 def set_screen(name_screen):
     sm.current = name_screen
+
 class TapT_Test(App):
     def build(self):
         sm.add_widget(Main_screen())
@@ -313,6 +380,7 @@ class TapT_Test(App):
         sm.add_widget(test_screen5())
         sm.add_widget(test_screen6())
         sm.add_widget(res_screen())
+        sm.add_widget(Download_screen())
         return sm
 
 
