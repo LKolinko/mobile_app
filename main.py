@@ -534,49 +534,47 @@ class Download_screen(Screen):
         self.clear_widgets()
         super().__init__()
         self.name = "Download"
-        self.test_screen1_layout = FloatLayout()
-        self.add_widget(self.test_screen1_layout)
 
         l = Label(text="Скачивание результата", pos_hint={'center_x': .5, 'center_y': .95}, font_size=Window.width / 16,
                   color=(0, 0, 0, 1))
-        self.test_screen1_layout.add_widget(l)
+        self.add_widget(l)
 
         self.text_input = TextInput(pos_hint={'center_x': .5, 'center_y': .75}, size_hint=(.9, .1))
-        self.test_screen1_layout.add_widget(self.text_input)
+        self.add_widget(self.text_input)
 
         l2 = Label(text='Введите имя файла:', pos_hint={'center_x': .5, 'center_y': .82}, color=(0, 0, 0, 1),
                    font_size='10pt')
-        self.test_screen1_layout.add_widget(l2)
+        self.add_widget(l2)
 
         l3 = Label(text='Выберите формат файла:', pos_hint={'center_x': .5, 'center_y': .6}, color=(0, 0, 0, 1),
                    font_size='10pt')
-        self.test_screen1_layout.add_widget(l3)
+        self.add_widget(l3)
 
         self.flag = 1
 
         lable_first_check = Label(text="<имя файла>.png", pos_hint={'center_x': .2, 'center_y': .5}, color=(0, 0, 0, 1))
-        self.test_screen1_layout.add_widget(lable_first_check)
+        self.add_widget(lable_first_check)
         first_check = CheckBox(group='test', pos_hint={'center_x': .9, 'center_y': .5}, size_hint=(.2, .2),
                                color=(0, 0, 0, 1), active=True, on_press=self.first_check_enter)
-        self.test_screen1_layout.add_widget(first_check)
+        self.add_widget(first_check)
 
         lable_second_check = Label(text="<имя файла>.pdf", pos_hint={'center_x': .2, 'center_y': .4},
                                    color=(0, 0, 0, 1))
-        self.test_screen1_layout.add_widget(lable_second_check)
+        self.add_widget(lable_second_check)
         second_check = CheckBox(group='test', pos_hint={'center_x': .9, 'center_y': .4}, size_hint=(.2, .2),
                                 color=(0, 0, 0, 1), on_press=self.second_check_enter)
-        self.test_screen1_layout.add_widget(second_check)
+        self.add_widget(second_check)
 
         btn = Button(text="Скачать файл", pos_hint={'center_x': .5, 'center_y': .1}, size_hint=(.7, .05),
                      color=(0, 0, 0, 1))
         btn.bind(on_press=self.Download)
         btn.opacity = 0.5
-        self.test_screen1_layout.add_widget(btn)
+        self.add_widget(btn)
 
         btn2 = Button(text="Пройти тест снова", pos_hint={'center_x': .5, 'center_y': .04}, size_hint=(.7, .05), color=(0,0,0,1))
         btn2.bind(on_press=self.to_main_screen)
         btn2.opacity = 0.5
-        self.test_screen1_layout.add_widget(btn2)
+        self.add_widget(btn2)
 
     def first_check_enter(self, *args):
         self.flag = 1
@@ -614,6 +612,51 @@ class Download_screen(Screen):
         shutil.move(name_save, download_dir_path)
 
     def to_main_screen(self, *args):
+
+        self.clear_widgets()
+
+        l = Label(text="Скачивание результата", pos_hint={'center_x': .5, 'center_y': .95}, font_size=Window.width / 16,
+                  color=(0, 0, 0, 1))
+        self.add_widget(l)
+
+        self.text_input = TextInput(pos_hint={'center_x': .5, 'center_y': .75}, size_hint=(.9, .1))
+        self.add_widget(self.text_input)
+
+        l2 = Label(text='Введите имя файла:', pos_hint={'center_x': .5, 'center_y': .82}, color=(0, 0, 0, 1),
+                   font_size='10pt')
+        self.add_widget(l2)
+
+        l3 = Label(text='Выберите формат файла:', pos_hint={'center_x': .5, 'center_y': .6}, color=(0, 0, 0, 1),
+                   font_size='10pt')
+        self.add_widget(l3)
+
+        self.flag = 1
+
+        lable_first_check = Label(text="<имя файла>.png", pos_hint={'center_x': .2, 'center_y': .5}, color=(0, 0, 0, 1))
+        self.add_widget(lable_first_check)
+        first_check = CheckBox(group='test', pos_hint={'center_x': .9, 'center_y': .5}, size_hint=(.2, .2),
+                               color=(0, 0, 0, 1), active=True, on_press=self.first_check_enter)
+        self.add_widget(first_check)
+
+        lable_second_check = Label(text="<имя файла>.pdf", pos_hint={'center_x': .2, 'center_y': .4},
+                                   color=(0, 0, 0, 1))
+        self.add_widget(lable_second_check)
+        second_check = CheckBox(group='test', pos_hint={'center_x': .9, 'center_y': .4}, size_hint=(.2, .2),
+                                color=(0, 0, 0, 1), on_press=self.second_check_enter)
+        self.add_widget(second_check)
+
+        btn = Button(text="Скачать файл", pos_hint={'center_x': .5, 'center_y': .1}, size_hint=(.7, .05),
+                     color=(0, 0, 0, 1))
+        btn.bind(on_press=self.Download)
+        btn.opacity = 0.5
+        self.add_widget(btn)
+
+        btn2 = Button(text="Пройти тест снова", pos_hint={'center_x': .5, 'center_y': .04}, size_hint=(.7, .05),
+                      color=(0, 0, 0, 1))
+        btn2.bind(on_press=self.to_main_screen)
+        btn2.opacity = 0.5
+        self.add_widget(btn2)
+
         set_screen("Main")
 
 
@@ -621,11 +664,8 @@ def set_screen(name_screen):
     if name_screen == "Main":
         for i in range(0, 6):
             results[i] = 0
-    if name_screen == "Res":
 
-        sm.current = name_screen
-    else:
-        sm.current = name_screen
+    sm.current = name_screen
 
 
 class TapT_Test(App):
