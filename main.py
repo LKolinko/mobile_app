@@ -51,7 +51,7 @@ class Main_screen(Screen):
 
         l = Label(
             text='Приветствую вас в нашем приложении! С помощью теста вы получите точные данные по уровню вашей стрессоустойчивости. По результатам теста вы увидите график, показывающий динамику вашей стрессоустойчивости.',
-            pos_hint={'center_x': .5, 'center_y': .3}, color=(0, 0, 0, 1),text_size=(Window.width - 25, None))
+            pos_hint={'center_x': .5, 'center_y': .3}, color=(0, 0, 0, 1),text_size=(Window.width - 25, None), halign="justify", valign="middle")
         self.add_widget(l)
 
         btn = Button(text='Далее', size_hint=(.7, .1), pos_hint={'center_x': .5, 'center_y': .1}, font_size='15sp',
@@ -127,13 +127,16 @@ class test_screen1(Screen):
     def callback(self, *args):
         Clock.schedule_once(self.ss, 5)
         if results[0] == 0:
-            Clock.schedule_interval(self.timer_ss, 0.02)
+            self.cnt = 0
+            Clock.schedule_once(self.timer_ss, 0.02)
         results[0] += 1
 
     def timer_widget(self, *args):
         self.cnt += 2
+        flag = True
         if 4 - self.cnt / 100 < 0:
             time_str = "00:00"
+            flag = False
 
         elif self.cnt % 100 == 0:
             time_str = "0" + str(4 - int(self.cnt / 100)) + ":" + "00"
@@ -145,6 +148,8 @@ class test_screen1(Screen):
             time_str = "0" + str(4 - int(self.cnt / 100)) + ":" + str(100 - self.cnt % 100)
 
         self.timer_scoreboard.text = time_str
+        if flag:
+            Clock.schedule_once(self.timer_ss, 0.02)
 
 # второй тест
 class test_screen2(Screen):
@@ -179,13 +184,16 @@ class test_screen2(Screen):
     def callback(self, *args):
         Clock.schedule_once(self.ss, 5)
         if results[1] == 0:
-            Clock.schedule_interval(self.timer_ss, 0.02)
+            self.cnt = 0
+            Clock.schedule_once(self.timer_ss, 0.02)
         results[1] += 1
 
     def timer_widget(self, *args):
         self.cnt += 2
+        flag = True
         if 4 - self.cnt / 100 < 0:
             time_str = "00:00"
+            flag = False
 
         elif self.cnt % 100 == 0:
             time_str = "0" + str(4 - int(self.cnt / 100)) + ":" + "00"
@@ -197,6 +205,8 @@ class test_screen2(Screen):
             time_str = "0" + str(4 - int(self.cnt / 100)) + ":" + str(100 - self.cnt % 100)
 
         self.timer_scoreboard.text = time_str
+        if flag:
+            Clock.schedule_once(self.timer_ss, 0.02)
 
 
 # третий тест
@@ -232,13 +242,16 @@ class test_screen3(Screen):
     def callback(self, *args):
         Clock.schedule_once(self.ss, 5)
         if results[2] == 0:
-            Clock.schedule_interval(self.timer_ss, 0.02)
+            self.cnt = 0
+            Clock.schedule_once(self.timer_ss, 0.02)
         results[2] += 1
 
     def timer_widget(self, *args):
         self.cnt += 2
+        flag = True
         if 4 - self.cnt / 100 < 0:
             time_str = "00:00"
+            flag = False
 
         elif self.cnt % 100 == 0:
             time_str = "0" + str(4 - int(self.cnt / 100)) + ":" + "00"
@@ -250,6 +263,8 @@ class test_screen3(Screen):
             time_str = "0" + str(4 - int(self.cnt / 100)) + ":" + str(100 - self.cnt % 100)
 
         self.timer_scoreboard.text = time_str
+        if flag:
+            Clock.schedule_once(self.timer_ss, 0.02)
 
 
 # четвёртый тест
@@ -285,13 +300,16 @@ class test_screen4(Screen):
     def callback(self, *args):
         Clock.schedule_once(self.ss, 5)
         if results[3] == 0:
-            Clock.schedule_interval(self.timer_ss, 0.02)
+            self.cnt = 0
+            Clock.schedule_once(self.timer_ss, 0.02)
         results[3] += 1
 
     def timer_widget(self, *args):
         self.cnt += 2
+        flag = True
         if 4 - self.cnt / 100 < 0:
             time_str = "00:00"
+            flag = False
 
         elif self.cnt % 100 == 0:
             time_str = "0" + str(4 - int(self.cnt / 100)) + ":" + "00"
@@ -303,6 +321,8 @@ class test_screen4(Screen):
             time_str = "0" + str(4 - int(self.cnt / 100)) + ":" + str(100 - self.cnt % 100)
 
         self.timer_scoreboard.text = time_str
+        if flag:
+            Clock.schedule_once(self.timer_ss, 0.02)
 
 
 # пятый тест
@@ -338,13 +358,16 @@ class test_screen5(Screen):
     def callback(self, *args):
         Clock.schedule_once(self.ss, 5)
         if results[4] == 0:
-            Clock.schedule_interval(self.timer_ss, 0.02)
+            self.cnt = 0
+            Clock.schedule_once(self.timer_ss, 0.02)
         results[4] += 1
 
     def timer_widget(self, *args):
         self.cnt += 2
+        flag = True
         if 4 - self.cnt / 100 < 0:
             time_str = "00:00"
+            flag = False
 
         elif self.cnt % 100 == 0:
             time_str = "0" + str(4 - int(self.cnt / 100)) + ":" + "00"
@@ -356,6 +379,8 @@ class test_screen5(Screen):
             time_str = "0" + str(4 - int(self.cnt / 100)) + ":" + str(100 - self.cnt % 100)
 
         self.timer_scoreboard.text = time_str
+        if flag:
+            Clock.schedule_once(self.timer_ss, 0.02)
 
 
 # шестой тест
@@ -391,13 +416,16 @@ class test_screen6(Screen):
     def callback(self, *args):
         Clock.schedule_once(self.ss, 5)
         if results[5] == 0:
-            Clock.schedule_interval(self.timer_ss, 0.02)
+            self.cnt = 0
+            Clock.schedule_once(self.timer_ss, 0.02)
         results[5] += 1
 
     def timer_widget(self, *args):
         self.cnt += 2
+        flag = True
         if 4 - self.cnt / 100 < 0:
             time_str = "00:00"
+            flag = False
 
         elif self.cnt % 100 == 0:
             time_str = "0" + str(4 - int(self.cnt / 100)) + ":" + "00"
@@ -409,6 +437,8 @@ class test_screen6(Screen):
             time_str = "0" + str(4 - int(self.cnt / 100)) + ":" + str(100 - self.cnt % 100)
 
         self.timer_scoreboard.text = time_str
+        if flag:
+            Clock.schedule_once(self.timer_ss, 0.02)
 
 
 class res_screen(Screen):
@@ -433,7 +463,7 @@ class res_screen(Screen):
         return 0
 
     def print_res(self, *args):
-        btn3 = Button(text='Скачать результат', size_hint=(.7, .07), pos_hint={'center_x': .5, 'center_y': .09},
+        btn3 = Button(text='Скачать результат', size_hint=(.7, .05), pos_hint={'center_x': .5, 'center_y': .1},
                       color=(0, 0, 0, 1))
         btn3.bind(on_press=self.download_file)
         btn3.opacity = 0.5
@@ -445,11 +475,16 @@ class res_screen(Screen):
 
         l = Label(
             text="Результаты уровня вашей стрессоустойчивасти представлены на графике. Для большей информации по графику, вам следует обратиться к врачу.",
-            pos_hint={'center_x': .5, 'center_y': .3}, color=(0, 0, 0, 1), text_size=(Window.width - 50, None))
+            pos_hint={'center_x': .5, 'center_y': .3}, color=(0, 0, 0, 1), text_size=(Window.width - 50, None),halign="justify", valign="middle")
         self.test_screen1_layout.add_widget(l)
 
-        l2 = Label(text="Спасибо за прохождение теста!", pos_hint={'center_x': .5, 'center_y': .17}, color=(0, 0, 0, 1))
+        l2 = Label(text="Спасибо за прохождение теста!", pos_hint={'center_x': .5, 'center_y': .2}, color=(0, 0, 0, 1))
         self.test_screen1_layout.add_widget(l2)
+
+        btn4 = Button(text="Пройти тест снова", size_hint=(.7, .05), pos_hint={'center_x': .5, 'center_y': .04},color=(0,0,0,1))
+        btn4.bind(on_press=self.to_main_screen)
+        btn4.opacity = 0.5
+        self.test_screen1_layout.add_widget(btn4)
 
         x = [1, 2, 3, 4, 5, 6]
         y = np.array(results)
@@ -466,6 +501,9 @@ class res_screen(Screen):
         os.remove(self.name_png)
 
         self.add_widget(self.im)
+
+    def to_main_screen(self, *args):
+        set_screen("Main")
 
 
 class Download_screen(Screen):
@@ -506,11 +544,16 @@ class Download_screen(Screen):
                                 color=(0, 0, 0, 1), on_press=self.second_check_enter)
         self.test_screen1_layout.add_widget(second_check)
 
-        btn = Button(text="Скачать файл", pos_hint={'center_x': .5, 'center_y': .1}, size_hint=(.7, .1),
+        btn = Button(text="Скачать файл", pos_hint={'center_x': .5, 'center_y': .1}, size_hint=(.7, .05),
                      color=(0, 0, 0, 1))
         btn.bind(on_press=self.Download)
         btn.opacity = 0.5
         self.test_screen1_layout.add_widget(btn)
+
+        btn2 = Button(text="Пройти тест снова", pos_hint={'center_x': .5, 'center_y': .04}, size_hint=(.7, .05), color=(0,0,0,1))
+        btn2.bind(on_press=self.to_main_screen)
+        btn2.opacity = 0.5
+        self.test_screen1_layout.add_widget(btn2)
 
     def first_check_enter(self, *args):
         self.flag = 1
@@ -547,35 +590,14 @@ class Download_screen(Screen):
         plt.close()
         shutil.move(name_save, download_dir_path)
 
+    def to_main_screen(self, *args):
+        set_screen("Main")
+
 
 def set_screen(name_screen):
-    if name_screen == "Second":
-        sm.remove_widget(Main_screen())
-
-    elif name_screen == "Test1":
-        sm.remove_widget(Second_screen())
-
-    elif name_screen == "Test2":
-        sm.remove_widget(test_screen1())
-
-    elif name_screen == "Test3":
-        sm.remove_widget(test_screen2())
-
-    elif name_screen == "Test4":
-        sm.remove_widget(test_screen3())
-
-    elif name_screen == "Test5":
-        sm.remove_widget(test_screen4())
-
-    elif name_screen == "Test6":
-        sm.remove_widget(test_screen5())
-
-    elif name_screen == "Res":
-        sm.remove_widget(test_screen6())
-
-    elif name_screen == "Download":
-        sm.remove_widget(res_screen())
-
+    if name_screen == "Main":
+        for i in range(0, 6):
+            results[i] = 0
     sm.current = name_screen
 
 
