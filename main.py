@@ -446,8 +446,6 @@ class res_screen(Screen):
         self.clear_widgets()
         super().__init__()
         self.name = 'Res'
-        self.test_screen1_layout = FloatLayout()
-        self.add_widget(self.test_screen1_layout)
 
         l = Label(text="Результат тестирования", pos_hint={'center_x': .5, "center_y": .95}, color=(0, 0, 0, 1),font_size=Window.width / 16)
         self.add_widget(l)
@@ -456,35 +454,48 @@ class res_screen(Screen):
                            color=(0, 0, 0, 1))
         self.btn1.bind(on_press=self.print_res)
         self.btn1.opacity = 0.5
-        self.test_screen1_layout.add_widget(self.btn1)
+        self.add_widget(self.btn1)
 
     def download_file(self, *args):
+
+        self.clear_widgets()
+        l = Label(text="Результат тестирования", pos_hint={'center_x': .5, "center_y": .95}, color=(0, 0, 0, 1),
+                  font_size=Window.width / 16)
+        self.add_widget(l)
+
+        self.btn1 = Button(text='Показать результат', size_hint=(.7, .3), pos_hint={'center_x': .5, 'center_y': .5},
+                           color=(0, 0, 0, 1))
+        self.btn1.bind(on_press=self.print_res)
+        self.btn1.opacity = 0.5
+        self.add_widget(self.btn1)
+
         set_screen("Download")
         return 0
 
     def print_res(self, *args):
+
+        self.remove_widget(self.btn1)
+
         btn3 = Button(text='Скачать результат', size_hint=(.7, .05), pos_hint={'center_x': .5, 'center_y': .1},
                       color=(0, 0, 0, 1))
         btn3.bind(on_press=self.download_file)
         btn3.opacity = 0.5
-        self.test_screen1_layout.add_widget(btn3)
-
-        self.test_screen1_layout.remove_widget(self.btn1)
+        self.add_widget(btn3)
 
         self.name_png = ''.join(choice(ascii_letters) for i in range(12)) + ".png"
 
         l = Label(
             text="Результаты уровня вашей стрессоустойчивасти представлены на графике. Для большей информации по графику, вам следует обратиться к врачу.",
             pos_hint={'center_x': .5, 'center_y': .3}, color=(0, 0, 0, 1), text_size=(Window.width - 50, None),halign="justify", valign="middle")
-        self.test_screen1_layout.add_widget(l)
+        self.add_widget(l)
 
         l2 = Label(text="Спасибо за прохождение теста!", pos_hint={'center_x': .5, 'center_y': .2}, color=(0, 0, 0, 1))
-        self.test_screen1_layout.add_widget(l2)
+        self.add_widget(l2)
 
         btn4 = Button(text="Пройти тест снова", size_hint=(.7, .05), pos_hint={'center_x': .5, 'center_y': .04},color=(0,0,0,1))
         btn4.bind(on_press=self.to_main_screen)
         btn4.opacity = 0.5
-        self.test_screen1_layout.add_widget(btn4)
+        self.add_widget(btn4)
 
         x = [1, 2, 3, 4, 5, 6]
         y = np.array(results)
@@ -503,6 +514,18 @@ class res_screen(Screen):
         self.add_widget(self.im)
 
     def to_main_screen(self, *args):
+
+        self.clear_widgets()
+        l = Label(text="Результат тестирования", pos_hint={'center_x': .5, "center_y": .95}, color=(0, 0, 0, 1),
+                  font_size=Window.width / 16)
+        self.add_widget(l)
+
+        self.btn1 = Button(text='Показать результат', size_hint=(.7, .3), pos_hint={'center_x': .5, 'center_y': .5},
+                           color=(0, 0, 0, 1))
+        self.btn1.bind(on_press=self.print_res)
+        self.btn1.opacity = 0.5
+        self.add_widget(self.btn1)
+
         set_screen("Main")
 
 
@@ -598,7 +621,11 @@ def set_screen(name_screen):
     if name_screen == "Main":
         for i in range(0, 6):
             results[i] = 0
-    sm.current = name_screen
+    if name_screen == "Res":
+
+        sm.current = name_screen
+    else:
+        sm.current = name_screen
 
 
 class TapT_Test(App):
