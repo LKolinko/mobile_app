@@ -16,6 +16,7 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.checkbox import CheckBox
 from kivy.lang import Builder
 from kivy.uix.label import Label
+from kivy.core.window import Window
 import time
 from os import path
 
@@ -35,6 +36,10 @@ sm = ScreenManager()
 # Экран приветсвия
 class Main_screen(Screen):
     def __init__(self):
+
+        Window.size = (400, 800)
+
+
         super().__init__()
         self.name = 'Main'
 
@@ -45,11 +50,11 @@ class Main_screen(Screen):
         self.add_widget(im)
 
         l = Label(
-            text='Приветствую вас в нашем приложении! С помощью\nтеста вы получите точные данные по уровню вашей\nстрессоустойчивости. По результатам теста вы\nувидите график, показывающий динамику вашей\nстрессоустойчивости.',
-            pos_hint={'center_x': .5, 'center_y': .3}, color=(0, 0, 0, 1))
+            text='Приветствую вас в нашем приложении! С помощью теста вы получите точные данные по уровню вашей стрессоустойчивости. По результатам теста вы увидите график, показывающий динамику вашей стрессоустойчивости.',
+            pos_hint={'center_x': .5, 'center_y': .3}, color=(0, 0, 0, 1),text_size=(Window.width - 25, None))
         self.add_widget(l)
 
-        btn = Button(text='Далее', size_hint=(.7, .1), pos_hint={'center_x': .5, 'center_y': .1}, font_size='20sp',
+        btn = Button(text='Далее', size_hint=(.7, .1), pos_hint={'center_x': .5, 'center_y': .1}, font_size='15sp',
                      color=(0, 0, 0, 1))
         btn.bind(on_press=self.to_second_scrn)
         btn.opacity = 0.5
@@ -70,16 +75,16 @@ class Second_screen(Screen):
         self.add_widget(im)
 
         l = Label(text='Инструкция по прохождению теста:', pos_hint={'center_x': .5, 'center_y': .7},
-                  color=(0, 0, 0, 1), font_size='20sp')
+                  color=(0, 0, 0, 1), font_size='20sp',text_size=(Window.width - 50, None))
         self.add_widget(l)
 
-        l2 = Label(text='1. На протяжении всего теста нам нужно держать\nлокоть навесу, на уровне кисти.\n\n'
-                        '2. Для прохождения теста рекомендуем\nиспользование стилуса.\n\n'
-                        '3. Вам нужно отметить наибольшее количество\nточек на экране в течение 5 секунд, 6 раз.',
-                   color=(0, 0, 0, 1), font_size='15sp', pos_hint={'center_x': .5, 'center_y': .5})
+        l2 = Label(text='1. На протяжении всего теста нам нужно держать локоть навесу, на уровне кисти.\n\n'
+                        '2. Для прохождения теста рекомендуем использование стилуса.\n\n'
+                        '3. Вам нужно отметить наибольшее количество точек на экране в течение 5 секунд, 6 раз.',
+                   color=(0, 0, 0, 1), font_size='15sp', pos_hint={'center_x': .5, 'center_y': .5},text_size=(Window.width - 50, None))
         self.add_widget(l2)
 
-        btn = Button(text='Начать', size_hint=(.7, .1), pos_hint={'center_x': .5, 'center_y': .1}, font_size='20sp',
+        btn = Button(text='Начать', size_hint=(.7, .1), pos_hint={'center_x': .5, 'center_y': .1}, font_size='15sp',
                      color=(0, 0, 0, 1))
         btn.bind(on_press=self.to_test_scrn)
         btn.opacity = 0.5
@@ -103,7 +108,7 @@ class test_screen1(Screen):
 
         self.cnt = 0
 
-        btn1 = Button(text='Область для отмечания точек', size_hint=(.8, .7), pos_hint={'center_x': .5, 'center_y': .4},
+        btn1 = Button(text='    Область для\n\nотмечания точек', size_hint=(.8, .7), pos_hint={'center_x': .5, 'center_y': .4},
                       font_size='20sp', color=(0, 0, 0, 1))
         btn1.opacity = 0.5
         btn1.bind(on_press=self.callback)
@@ -155,7 +160,7 @@ class test_screen2(Screen):
 
         self.cnt = 0
 
-        btn1 = Button(text='Область для отмечания точек', size_hint=(.8, .7), pos_hint={'center_x': .5, 'center_y': .4},
+        btn1 = Button(text='    Область для\n\nотмечания точек', size_hint=(.8, .7), pos_hint={'center_x': .5, 'center_y': .4},
                       font_size='20sp', color=(0, 0, 0, 1))
         btn1.bind(on_press=self.callback)
         btn1.opacity = 0.5
@@ -208,7 +213,7 @@ class test_screen3(Screen):
 
         self.cnt = 0
 
-        btn1 = Button(text='Область для отмечания точек', size_hint=(.8, .7), pos_hint={'center_x': .5, 'center_y': .4},
+        btn1 = Button(text='    Область для\n\nотмечания точек', size_hint=(.8, .7), pos_hint={'center_x': .5, 'center_y': .4},
                       font_size='20sp', color=(0, 0, 0, 1))
         btn1.bind(on_press=self.callback)
         btn1.opacity = 0.5
@@ -261,7 +266,7 @@ class test_screen4(Screen):
 
         self.cnt = 0
 
-        btn1 = Button(text='Область для отмечания точек', size_hint=(.8, .7), pos_hint={'center_x': .5, 'center_y': .4},
+        btn1 = Button(text='    Область для\n\nотмечания точек', size_hint=(.8, .7), pos_hint={'center_x': .5, 'center_y': .4},
                       font_size='20sp', color=(0, 0, 0, 1))
         btn1.bind(on_press=self.callback)
         btn1.opacity = 0.5
@@ -314,7 +319,7 @@ class test_screen5(Screen):
 
         self.cnt = 0
 
-        btn1 = Button(text='Область для отмечания точек', size_hint=(.8, .7), pos_hint={'center_x': .5, 'center_y': .4},
+        btn1 = Button(text='    Область для\n\nотмечания точек', size_hint=(.8, .7), pos_hint={'center_x': .5, 'center_y': .4},
                       font_size='20sp', color=(0, 0, 0, 1))
         btn1.bind(on_press=self.callback)
         btn1.opacity = 0.5
@@ -367,7 +372,7 @@ class test_screen6(Screen):
 
         self.cnt = 0
 
-        btn1 = Button(text='Область для отмечания точек', size_hint=(.8, .7), pos_hint={'center_x': .5, 'center_y': .4},
+        btn1 = Button(text='    Область для\n\nотмечания точек', size_hint=(.8, .7), pos_hint={'center_x': .5, 'center_y': .4},
                       font_size='20sp', color=(0, 0, 0, 1))
         btn1.bind(on_press=self.callback)
         btn1.opacity = 0.5
@@ -414,8 +419,7 @@ class res_screen(Screen):
         self.test_screen1_layout = FloatLayout()
         self.add_widget(self.test_screen1_layout)
 
-        l = Label(text="Результат тестирования", pos_hint={'center_x': .5, "center_y": .95}, color=(0, 0, 0, 1),
-                  font_size='15pt')
+        l = Label(text="Результат тестирования", pos_hint={'center_x': .5, "center_y": .95}, color=(0, 0, 0, 1),font_size=Window.width / 16)
         self.add_widget(l)
 
         self.btn1 = Button(text='Показать результат', size_hint=(.7, .3), pos_hint={'center_x': .5, 'center_y': .5},
@@ -440,8 +444,8 @@ class res_screen(Screen):
         self.name_png = ''.join(choice(ascii_letters) for i in range(12)) + ".png"
 
         l = Label(
-            text="Результаты уровня вашей стрессоустойчивасти\nпредставлены на графике. Для большей\nинформации по графику, вам следует\nобратиться к врачу.",
-            pos_hint={'center_x': .5, 'center_y': .25}, color=(0, 0, 0, 1))
+            text="Результаты уровня вашей стрессоустойчивасти представлены на графике. Для большей информации по графику, вам следует обратиться к врачу.",
+            pos_hint={'center_x': .5, 'center_y': .3}, color=(0, 0, 0, 1), text_size=(Window.width - 50, None))
         self.test_screen1_layout.add_widget(l)
 
         l2 = Label(text="Спасибо за прохождение теста!", pos_hint={'center_x': .5, 'center_y': .17}, color=(0, 0, 0, 1))
@@ -449,7 +453,7 @@ class res_screen(Screen):
 
         x = [1, 2, 3, 4, 5, 6]
         y = np.array(results)
-        plt.title("Результаты теста")
+        plt.title("Результат теста")
         plt.xlabel("№  попытки")
         plt.ylabel("количество нажатий")
         plt.plot(x, y, color="green")
@@ -472,7 +476,7 @@ class Download_screen(Screen):
         self.test_screen1_layout = FloatLayout()
         self.add_widget(self.test_screen1_layout)
 
-        l = Label(text="Скачивание результата", pos_hint={'center_x': .5, 'center_y': .95}, font_size='15pt',
+        l = Label(text="Скачивание результата", pos_hint={'center_x': .5, 'center_y': .95}, font_size=Window.width / 16,
                   color=(0, 0, 0, 1))
         self.test_screen1_layout.add_widget(l)
 
