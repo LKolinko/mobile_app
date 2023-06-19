@@ -122,11 +122,11 @@ class test_screen1(Screen):
     def callback(self, *args):
         Clock.schedule_once(self.ss, 5)
         if results[0] == 0:
-            Clock.schedule_interval(self.timer_ss, 0.05)
+            Clock.schedule_interval(self.timer_ss, 0.02)
         results[0] += 1
 
     def timer_widget(self, *args):
-        self.cnt += 5
+        self.cnt += 2
         if 4 - self.cnt / 100 < 0:
             time_str = "00:00"
 
@@ -174,11 +174,11 @@ class test_screen2(Screen):
     def callback(self, *args):
         Clock.schedule_once(self.ss, 5)
         if results[1] == 0:
-            Clock.schedule_interval(self.timer_ss, 0.05)
+            Clock.schedule_interval(self.timer_ss, 0.02)
         results[1] += 1
 
     def timer_widget(self, *args):
-        self.cnt += 5
+        self.cnt += 2
         if 4 - self.cnt / 100 < 0:
             time_str = "00:00"
 
@@ -227,11 +227,11 @@ class test_screen3(Screen):
     def callback(self, *args):
         Clock.schedule_once(self.ss, 5)
         if results[2] == 0:
-            Clock.schedule_interval(self.timer_ss, 0.05)
+            Clock.schedule_interval(self.timer_ss, 0.02)
         results[2] += 1
 
     def timer_widget(self, *args):
-        self.cnt += 5
+        self.cnt += 2
         if 4 - self.cnt / 100 < 0:
             time_str = "00:00"
 
@@ -280,11 +280,11 @@ class test_screen4(Screen):
     def callback(self, *args):
         Clock.schedule_once(self.ss, 5)
         if results[3] == 0:
-            Clock.schedule_interval(self.timer_ss, 0.05)
+            Clock.schedule_interval(self.timer_ss, 0.02)
         results[3] += 1
 
     def timer_widget(self, *args):
-        self.cnt += 5
+        self.cnt += 2
         if 4 - self.cnt / 100 < 0:
             time_str = "00:00"
 
@@ -333,11 +333,11 @@ class test_screen5(Screen):
     def callback(self, *args):
         Clock.schedule_once(self.ss, 5)
         if results[4] == 0:
-            Clock.schedule_interval(self.timer_ss, 0.05)
+            Clock.schedule_interval(self.timer_ss, 0.02)
         results[4] += 1
 
     def timer_widget(self, *args):
-        self.cnt += 5
+        self.cnt += 2
         if 4 - self.cnt / 100 < 0:
             time_str = "00:00"
 
@@ -386,11 +386,11 @@ class test_screen6(Screen):
     def callback(self, *args):
         Clock.schedule_once(self.ss, 5)
         if results[5] == 0:
-            Clock.schedule_interval(self.timer_ss, 0.05)
+            Clock.schedule_interval(self.timer_ss, 0.02)
         results[5] += 1
 
     def timer_widget(self, *args):
-        self.cnt += 5
+        self.cnt += 2
         if 4 - self.cnt / 100 < 0:
             time_str = "00:00"
 
